@@ -1,0 +1,22 @@
+--- D:/Qt/qt-everywhere-src-5.12.8/qtbase/src/tools/moc_old/moc.cpp	2020-01-22 20:17:20.000000000 +0800
++++ C:/Users/yibc/Desktop/modified/moc.cpp	2026-03-06 14:40:33.892541200 +0800
+@@ -691,6 +691,9 @@
+ 
+                 while (inClass(&def) && hasNext()) {
+                     switch (next()) {
++                    case Q_RPC_MODULE_TOKEN:
++                        def.hasQRpc = true;
++                        break;
+                     case Q_OBJECT_TOKEN:
+                         def.hasQObject = true;
+                         break;
+@@ -764,6 +767,9 @@
+                         error("Missing access specifier for slots");
+                     }
+                     break;
++                case Q_RPC_MODULE_TOKEN:
++                    def.hasQRpc = true;
++                    break;
+                 case Q_OBJECT_TOKEN:
+                     def.hasQObject = true;
+                     if (templateClass)
