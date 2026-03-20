@@ -1,0 +1,18 @@
+--- D:/Qt/qt-everywhere-src-5.12.8/qtbase/src/tools/moc_old/generator.h	2020-01-22 20:17:20.000000000 +0800
++++ C:/Users/yibc/Desktop/modified/generator.h	2026-03-06 14:41:00.109342100 +0800
+@@ -59,6 +59,7 @@
+     void generateStaticMetacall();
+     void generateSignal(FunctionDef *def, int index);
+     void generatePluginMetaData();
++    void generateRpcTypeRegister();
+     QMultiMap<QByteArray, int> automaticPropertyMetaTypesHelper();
+     QMap<int, QMultiMap<QByteArray, int> > methodsWithAutomaticTypesHelper(const QVector<FunctionDef> &methodList);
+ 
+@@ -69,6 +70,7 @@
+     QVector<QByteArray> metaTypes;
+     QHash<QByteArray, QByteArray> knownQObjectClasses;
+     QHash<QByteArray, QByteArray> knownGadgets;
++    QSet<QByteArray> customType;
+ };
+ 
+ QT_END_NAMESPACE

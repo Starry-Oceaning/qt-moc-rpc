@@ -1,0 +1,10 @@
+--- D:/Qt/qt-everywhere-src-5.12.8/qtbase/src/tools/moc_old/token.h	2020-01-22 20:17:20.000000000 +0800
++++ C:/Users/yibc/Desktop/modified/token.h	2026-03-06 14:38:10.092821900 +0800
+@@ -177,6 +177,7 @@
+     F(Q_INVOKABLE_TOKEN) \
+     F(Q_SCRIPTABLE_TOKEN) \
+     F(Q_PRIVATE_PROPERTY_TOKEN) \
++	F(Q_RPC_MODULE_TOKEN) \
+     F(Q_REVISION_TOKEN) \
+     F(SPECIAL_TREATMENT_MARK) \
+     F(MOC_INCLUDE_BEGIN) \
