@@ -1,0 +1,60 @@
+--- D:/Qt/qt-everywhere-src-5.12.8/qtbase/src/tools/moc_old/generator.cpp	2020-01-22 20:17:20.000000000 +0800
++++ C:/Users/yibc/Desktop/modified/generator.cpp	2026-03-06 14:41:31.345940700 +0800
+@@ -612,6 +612,11 @@
+     generatePluginMetaData();
+ 
+ //
++// Generate rpc type register
++//
++    generateRpcTypeRegister();
++
++//
+ // Generate function to make sure the non-class signals exist in the parent classes
+ //
+     if (!cdef->nonClassSignalList.isEmpty()) {
+@@ -654,15 +659,21 @@
+         const FunctionDef &f = list.at(i);
+ 
+         strreg(f.name);
+-        if (!isBuiltinType(f.normalizedType))
++        if (!isBuiltinType(f.normalizedType)) {
+             strreg(f.normalizedType);
++            QByteArray strType(f.normalizedType);
++            customType.insert(strType.replace('&',""));
++        }
+         strreg(f.tag);
+ 
+         int argsCount = f.arguments.count();
+         for (int j = 0; j < argsCount; ++j) {
+             const ArgumentDef &a = f.arguments.at(j);
+-            if (!isBuiltinType(a.normalizedType))
++            if (!isBuiltinType(a.normalizedType)) {
+                 strreg(a.normalizedType);
++                QByteArray strType(a.normalizedType);
++                customType.insert(strType.replace('&',""));
++            }
+             strreg(a.name);
+         }
+     }
+@@ -1674,6 +1685,21 @@
+             cdef->qualified.constData(), cdef->classname.constData());
+ }
+ 
++void Generator::generateRpcTypeRegister()
++{
++    if (!cdef->hasQRpc) {
++        return;
++    }
++    fprintf(out, "\nvoid %s::registerRpcType()\n", cdef->qualified.constData());
++    fprintf(out, "{\n");
++    fprintf(out, "    %s::registerRpcType();", purestSuperClass.constData());
++    for(auto type: customType)
++    {
++        fprintf(out, "\n    qRpcRegisterMetaType<%s>(\"%s\");", type.constData(), type.constData());
++    }
++    fprintf(out, "\n}\n");
++}
++
+ QT_WARNING_DISABLE_GCC("-Wunused-function")
+ QT_WARNING_DISABLE_CLANG("-Wunused-function")
+ QT_WARNING_DISABLE_CLANG("-Wundefined-internal")

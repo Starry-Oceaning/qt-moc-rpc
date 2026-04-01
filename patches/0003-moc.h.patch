@@ -1,0 +1,10 @@
+--- D:/Qt/qt-everywhere-src-5.12.8/qtbase/src/tools/moc_old/moc.h	2020-01-22 20:17:20.000000000 +0800
++++ C:/Users/yibc/Desktop/modified/moc.h	2026-03-06 14:39:35.595478500 +0800
+@@ -171,6 +171,7 @@
+ 
+     bool hasQObject = false;
+     bool hasQGadget = false;
++    bool hasQRpc = false;
+ 
+     struct PluginData {
+         QByteArray iid;
